@@ -1,0 +1,107 @@
+l = input('Выберите шифр Цезаря(русский и english)/Виженера(english): ')
+if l =='Цезаря':
+    a=input('Выбери язык Русский/English: ')
+    if a=="Русский":
+        a = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+        b = input("Введите исходный текст: ")
+        key = int(input("Пожалуйста, задайте ключ (цифра от 1 до 32): "))
+        b = b.lower() 
+        c =  ""     
+        for letter in b:
+            p = a.find(letter)
+            newP = p + key 
+            if letter in a:
+                c = c + a[newP] 
+            else:
+                c = c + letter 
+        print("Твой шифр: ", c)
+        a = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+        b = input("Введите исходный текст: ")
+        key = int(input("Пожалуйста, задайте ключ (цифра от 1 до 32): "))
+        b = b.lower()
+        c =  ""
+         
+        for letter in b:
+            p = a.find(letter) 
+            newP = p - key
+            if letter in a: 
+                c = c + a[newP]
+            else:
+                c = c + letter
+            print("Твой шифр: ", c)
+    if a=="English":
+        a = "abcdefghijklmnopqrstuvwxyz"
+        b = input("Введите исходный текст: ")
+        key = int(input("Пожалуйста, задайте ключ (цифра от 1 до 25): "))
+        b = b.lower()
+        c =  ""
+         
+        for letter in b:
+            p = a.find(letter)
+            newP = p + key 
+            if letter in a:
+                c = c + a[newP] 
+            else:
+                c = c + letter
+            print("Твой шифр: ", c)
+
+        a = "abcdefghijklmnopqrstuvwxyz"
+        b = input("Введите зашифрованный текст: ")
+        key = int(input("Пожалуйста, задайте ключ (цифра от 1 до 25): "))
+        b = b.lower()
+        c =  ""
+         
+        for letter in b:
+            p = a.find(letter) 
+            newP = p - key
+            if letter in a: 
+                c = c + a[newP]
+            else:
+                c = c + letter
+            print("Твой исходный текст: ", c)
+elif l =='Виженера':
+        def vigenere_encrypt(plaintext, keyword):
+            alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            keyword_repeated = ''
+            encrypted_text = ''
+            plaintext = plaintext.replace(' ', '').upper()
+            keyword = keyword.replace(' ', '').upper()
+            while len(keyword_repeated) < len(plaintext):
+                keyword_repeated += keyword
+            keyword_repeated = keyword_repeated[:len(plaintext)]  
+            for p, k in zip(plaintext, keyword_repeated):
+                if p in alphabet:
+                    p_index = alphabet.index(p)
+                    k_index = alphabet.index(k)
+                    encrypted_index = (p_index + k_index) % 26
+                    encrypted_text += alphabet[encrypted_index]
+                else:
+                    encrypted_text += p  
+                    
+            return encrypted_text
+        plaintext = input('Введите слово: ')
+        keyword = input('Введите ключ: ')
+        encrypted = vigenere_encrypt(plaintext, keyword)
+        print(f'Зашифрованный текст: {encrypted}')
+    def vigenere_encrypt(plaintext, keyword):
+                alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                keyword_repeated = ''
+                encrypted_text = ''
+                plaintext = plaintext.replace(' ', '').upper()
+                keyword = keyword.replace(' ', '').upper()
+                while len(keyword_repeated) < len(plaintext):
+                    keyword_repeated += keyword
+                keyword_repeated = keyword_repeated[:len(plaintext)]  
+                for p, k in zip(plaintext, keyword_repeated):
+                    if p in alphabet:
+                        p_index = alphabet.index(p)
+                        k_index = alphabet.index(k)
+                        encrypted_index = (p_index - k_index) % 26
+                        encrypted_text += alphabet[encrypted_index]
+                    else:
+                        encrypted_text += p   
+                return encrypted_text
+    plaintext = input('Введите шифр: ')
+    keyword = input('Введите ключ: ')
+    encrypted = vigenere_encrypt(plaintext, keyword)
+    print(f'Ваше слово: {encrypted}')
